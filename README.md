@@ -2,8 +2,7 @@
 
 Painel de **contas a pagar** integrado diretamente ao ERP Bling — uma alternativa à planilha atualizada manualmente todos os dias.
 
-<!-- Substitua docs/dashboard-placeholder.svg pela captura do seu dashboard. -->
-![Espaço reservado para a foto do dashboard](docs/dashboard-placeholder.svg)
+![Dashboard de contas a pagar com dados anonimizados](docs/dashboard.png)
 
 > **Implementação inicial:** este repositório contém o Worker, o script Power Query, a medida DAX e um tema inicial do Power BI. A integração precisa ser validada com uma conta Bling de teste e configurada com os secrets/IDs da sua própria Cloudflare antes de uso real.
 
@@ -86,11 +85,11 @@ O painel apresenta:
 ├── worker/            Worker OAuth, cache e API intermediária
 ├── powerquery/        script M paginado para carregar as contas
 ├── powerbi/           medida HTML/DAX e tema JSON
-├── docs/              placeholder da foto e notas de implementação
+├── docs/              captura anonimizada e notas de implementação
 └── README.md
 ```
 
-> **Para adicionar sua foto:** substitua `docs/dashboard-placeholder.svg` pela sua captura e atualize o link da imagem acima se usar outro nome ou formato. Oculte dados reais de fornecedores, valores e vencimentos antes de publicar.
+> **Imagem:** a captura atual teve valores, nomes de fornecedores e datas borrados antes da publicação. Se trocar a imagem, anonimize novamente os dados financeiros e pessoais antes de enviar ao repositório público.
 
 ## Licença
 
