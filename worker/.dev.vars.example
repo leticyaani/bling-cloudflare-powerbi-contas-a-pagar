@@ -1,0 +1,5 @@
+# Copie para .dev.vars localmente e preencha apenas na sua máquina.
+# Nunca comite .dev.vars nem envie essas credenciais pelo chat.
+BLING_CLIENT_ID="PREENCHA_LOCALMENTE"
+BLING_CLIENT_SECRET="PREENCHA_LOCALMENTE"
+API_ACCESS_KEY="GERE_UMA_CHAVE_FORTE_LOCALMENTE"

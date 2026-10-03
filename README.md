@@ -5,7 +5,7 @@ Painel de **contas a pagar** integrado diretamente ao ERP Bling — uma alternat
 <!-- Substitua docs/dashboard-placeholder.svg pela captura do seu dashboard. -->
 ![Espaço reservado para a foto do dashboard](docs/dashboard-placeholder.svg)
 
-> **Estado deste repositório:** o material recebido descreve a arquitetura e o funcionamento do projeto, mas não inclui os arquivos-fonte do Worker, do Power Query ou do Power BI. A estrutura está preparada para recebê-los; esses componentes ainda precisam ser adicionados para que a integração possa ser executada.
+> **Implementação inicial:** este repositório contém o Worker, o script Power Query, a medida DAX e um tema inicial do Power BI. A integração precisa ser validada com uma conta Bling de teste e configurada com os secrets/IDs da sua própria Cloudflare antes de uso real.
 
 ## Sobre o projeto
 
@@ -59,22 +59,23 @@ O painel apresenta:
 
 1. Crie um app no Bling e habilite os escopos de **leitura** necessários: contas a pagar, contatos, caixas e bancos, contas contábeis e borderôs.
 2. Crie um namespace KV na Cloudflare e associe-o ao Worker com o nome `KV`.
-3. Configure `BLING_CLIENT_ID` e `BLING_CLIENT_SECRET` como **secrets** do Worker.
-4. Faça o deploy do Worker e cadastre a URL da rota `/callback` no app do Bling.
-5. Acesse `/login` uma vez para autorizar a integração.
-6. No Power BI, use o script `powerquery/contas_pagar.pq`, substitua `SEU-WORKER.workers.dev` pelo endereço do seu Worker e selecione autenticação **Anônimo**.
+3. No Cloudflare, configure `BLING_CLIENT_ID`, `BLING_CLIENT_SECRET` e `API_ACCESS_KEY` como **secrets** do Worker; gere uma chave forte para o último.
+4. Atualize `BLING_REDIRECT_URI` em `worker/wrangler.toml` e cadastre exatamente essa URL terminada em `/callback` no app do Bling.
+5. Faça o deploy do Worker e abra `/login` uma vez para autorizar a integração.
+6. No Power BI, use `powerquery/contas_pagar.pq`, troque `SEU-WORKER.workers.dev` pela URL do Worker e crie o parâmetro de texto `pWorkerApiKey` com o mesmo valor de `API_ACCESS_KEY`. Configure a fonte Web como **Anônima**; a chave segue no cabeçalho `X-API-Key`.
 
 ## Segurança
 
 - Nunca inclua Client ID, Client Secret ou tokens diretamente no código. Armazene-os como secrets.
 - Habilite no Bling somente os escopos de leitura necessários.
-- **Antes de usar em produção, proteja o endpoint com uma chave de acesso.** Sem essa proteção, uma API pública pode expor dados financeiros a quem tiver o link.
+- Os endpoints de contas e diagnóstico exigem `API_ACCESS_KEY` e falham fechados se a chave não estiver configurada. Proteja essa chave e avalie quem pode extrair o parâmetro do PBIX antes de compartilhar o relatório.
 - Remova rotas de diagnóstico antes de publicar.
 - Use apenas dados fictícios nas imagens e exemplos publicados neste repositório.
 
 ## Próximos passos
 
-- [ ] Adicionar chave de acesso à API.
+- [x] Exigir chave de acesso na API.
+- [ ] Validar os endpoints/campos com uma conta de homologação Bling.
 - [ ] Configurar atualização agendada no Power BI Service.
 - [ ] Incluir contas a receber.
 - [ ] Criar alerta de vencimentos do dia.
@@ -82,10 +83,10 @@ O painel apresenta:
 ## Estrutura do repositório
 
 ```text
-├── worker/            reservado ao código do Cloudflare Worker (sem credenciais)
-├── powerquery/        reservado ao script M para o Power BI
-├── powerbi/           reservado ao tema e às medidas DAX do layout
-├── docs/              imagem demonstrativa e documentação
+├── worker/            Worker OAuth, cache e API intermediária
+├── powerquery/        script M paginado para carregar as contas
+├── powerbi/           medida HTML/DAX e tema JSON
+├── docs/              placeholder da foto e notas de implementação
 └── README.md
 ```
 

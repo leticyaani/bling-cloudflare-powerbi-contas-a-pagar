@@ -1,0 +1,16 @@
+name = "bling-contas-pagar-api"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+# Troque pelo mesmo endereço cadastrado como redirect URI no app do Bling.
+BLING_REDIRECT_URI = "https://SEU-WORKER.workers.dev/callback"
+# Restrinja à origem necessária quando houver uma origem browser fixa; Power BI Desktop/Service pode exigir configuração própria.
+ALLOWED_ORIGIN = "*"
+
+# Antes do deploy, crie um namespace: npx wrangler kv namespace create KV
+# Depois descomente e substitua o ID pelo retornado pela Cloudflare:
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "SUBSTITUA_PELO_ID_REAL_DA_NAMESPACE"
