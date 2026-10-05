@@ -65,17 +65,9 @@ O painel apresenta:
 5. Faça o deploy do Worker e abra `/login` uma vez para autorizar a integração.
 6. No Power BI, use `powerquery/contas_pagar.pq`, troque `SEU-WORKER.workers.dev` pela URL do Worker e crie o parâmetro de texto `pWorkerApiKey` com o mesmo valor de `API_ACCESS_KEY`. Configure a fonte Web como **Anônima**; a chave segue no cabeçalho `X-API-Key`.
 
-## Segurança
-
-- Nunca inclua Client ID, Client Secret ou tokens diretamente no código. Armazene-os como secrets.
-- Habilite no Bling somente os escopos de leitura necessários.
-- Os endpoints de contas e diagnóstico exigem `API_ACCESS_KEY` e falham fechados se a chave não estiver configurada. Proteja essa chave e avalie quem pode extrair o parâmetro do PBIX antes de compartilhar o relatório.
-- Remova rotas de diagnóstico antes de publicar.
-- Use apenas dados fictícios nas imagens e exemplos publicados neste repositório.
-
 ## Próximos passos
 
-- [x] Exigir chave de acesso na API.
+- [ ] Exigir chave de acesso na API.
 - [ ] Validar os endpoints/campos com uma conta de homologação Bling.
 - [ ] Configurar atualização agendada no Power BI Service.
 - [ ] Incluir contas a receber.
@@ -90,9 +82,6 @@ O painel apresenta:
 ├── docs/              capturas do dashboard e notas de implementação
 └── README.md
 ```
-
-> **Imagens:** o README exibe as duas capturas originais fornecidas. A versão anonimizada continua disponível em `docs/dashboard.png`.
-
 ## Licença
 
 Este projeto está sob a licença [MIT](LICENSE). Antes de publicar, substitua `[NOME DO TITULAR]` no arquivo `LICENSE` pelo nome do titular dos direitos autorais.
